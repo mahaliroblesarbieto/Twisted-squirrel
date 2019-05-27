@@ -98,7 +98,8 @@ class App extends Component {
       if (!collidesWithAcorn) nextState.squirrel.body.pop();
       return nextState;
     }, () => {
-      if (this.isOffEdge()) {
+      const {squirrel} = this.state;
+      if (this.isOffEdge() || this.isBody(squirrel.head)) {
         this.setState({
           gameOver: true,
         });
