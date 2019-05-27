@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Score from './components/Score'
 
 import './App.css';
 
@@ -33,7 +34,7 @@ class App extends Component {
           x: 1,
           y: 0
         },
-        body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}]
+        body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}],
       }    
     }
   }
@@ -180,7 +181,8 @@ class App extends Component {
   render(){
     const {grid, squirrel, gameOver} = this.state;
     return(
-      <div className="App">
+      <div className="row">
+      <div className="App col-md-8">
         {
           gameOver
           ? <h1>Fin del juego! Tu puntaje es {squirrel.body.length -2 }! </h1>
@@ -201,6 +203,10 @@ class App extends Component {
           }
         </section>
         }
+      </div>
+      < Score className="col-md-4"
+        score={squirrel.body.length -2}
+      />
       </div>
     );
   }
