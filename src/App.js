@@ -63,11 +63,27 @@ class App extends Component {
     });
     setTimeout(() => {
       this.gameLoop()
-    }, 1000)
+    }, this.state.squirrel.body.length ? (400 / this.state.squirrel.body.length) + 200 : 400)
+  }
+
+  getRandomAcorn = () => {
+    const { squirrel } = this.state;
+    const newAcorn = {
+      row: Math.floor(Math.random() * 16),
+      col: Math.floor(Math.random() * 16),
+    };
+    if (this.isBody(newAcorn) || (
+      squirrel.head.row === newAcorn.row
+      && squirrel.head.col === newAcorn.col)) {
+      return this.getRandomAcorn();
+    } else {
+      return newAcorn;
+    }
   }
 
   gameLoop = () => {
-    this.setState(({squirrel}) => {
+    this.setState(({squirrel, acorn}) => {
+      const collidesWithAcorn = this.collidesWithAcorn();
       const nextState = {
         squirrel: {
           ...squirrel,
@@ -77,11 +93,13 @@ class App extends Component {
           },
           body: [squirrel.head, ...squirrel.body]
         },
+        acorn: collidesWithAcorn ? this.getRandomAcorn() : acorn
       };
-      nextState.squirrel.body.pop();
+      if (!collidesWithAcorn) nextState.squirrel.body.pop();
       return nextState;
     }, () => {
-      if (this.isOffEdge()) {
+      const {squirrel} = this.state;
+      if (this.isOffEdge() || this.isBody(squirrel.head)) {
         this.setState({
           gameOver: true,
         });
@@ -89,7 +107,7 @@ class App extends Component {
       }
       setTimeout(() => {
         this.gameLoop()
-      }, 1000)
+      }, this.state.squirrel.body.length ? (400 / this.state.squirrel.body.length) + 200 : 400)
     });
   }
 
@@ -102,6 +120,12 @@ class App extends Component {
       || squirrel.head.row < 0) {
         return true;
       }
+  }
+
+  collidesWithAcorn = () => {
+    const { acorn, squirrel } = this.state;
+    return acorn.row === squirrel.head.row
+      && acorn.col === squirrel.head.col;
   }
 
   setDirection = (event) => {
@@ -154,14 +178,13 @@ class App extends Component {
   }
 
   render(){
-    const {grid, gameOver} = this.state;
+    const {grid, squirrel, gameOver} = this.state;
     return(
       <div className="App">
         {
           gameOver
-          ? <h1>Game Over!</h1>
-          : 
-        <section className="grid">
+          ? <h1>Fin del juego! Tu puntaje es {squirrel.body.length -2 }! </h1>
+          : <section className="grid">
           {
             grid.map((row, i) => (
               row.map(cell => 
@@ -179,7 +202,7 @@ class App extends Component {
         </section>
         }
       </div>
-    )
+    );
   }
 
 }
