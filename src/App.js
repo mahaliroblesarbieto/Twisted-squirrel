@@ -6,6 +6,7 @@ class App extends Component {
   constructor(){
     super()
     const grid = [];
+    const arrScore = [];
     const initialHeadRow = Math.floor(Math.random() * (14 - 2) +2);
     const initialHeadCol = Math.floor(Math.random() * (14 - 2) +2);
     for(let row = 0; row < 16; row++){
@@ -20,6 +21,7 @@ class App extends Component {
     }
     this.state = {
       grid,
+      arrScore,
       acorn: {
         row: Math.floor(Math.random() * 16),
         col: Math.floor(Math.random() * 16),
@@ -178,7 +180,7 @@ class App extends Component {
   }
 
   render(){
-    const {grid, gameOver, squirrel} = this.state;
+    const {grid, gameOver, squirrel, arrScore} = this.state;
     return(
       <div className="row">
       <div className="App col-md-8">
@@ -200,7 +202,8 @@ class App extends Component {
               acorn: {
                 row: Math.floor(Math.random() * 16),
                 col: Math.floor(Math.random() * 16),
-              }
+              },
+              arrScore: [...arrScore, squirrel.body.length-2]
             };
           return nextState;
           }, () => {
@@ -229,10 +232,10 @@ class App extends Component {
       </div>
       < Score className="col-md-4"
         score={squirrel.body.length-2}
+        arrScore={arrScore}
       />
       </div>
     );
   }
-
 }
 export default App;
