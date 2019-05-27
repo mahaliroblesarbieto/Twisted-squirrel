@@ -1,9 +1,11 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 export default function Score (props) {
         return(
           <div>
-            {props.arrScore > 0 ? 
+            { 
+              props.arrScore.length > 0 ? 
               <div>
                 {props.arrScore.map((item) => (
                   <div className="row">
@@ -34,4 +36,9 @@ export default function Score (props) {
               </div>} 
             </div>
         )
+}
+
+Score.propTypes = {
+  arrScore: propTypes.array.isRequired,
+  score: propTypes.number.isRequired,
 }

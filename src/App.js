@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import Score from './components/Score'
+import Score from './components/Score';
+// import Header from './components/Header';
 import './App.css';
 
 class App extends Component {
   constructor(){
     super()
     const grid = [];
-    const arrScore = [];
     const initialHeadRow = Math.floor(Math.random() * (14 - 2) +2);
     const initialHeadCol = Math.floor(Math.random() * (14 - 2) +2);
     for(let row = 0; row < 16; row++){
@@ -20,8 +20,8 @@ class App extends Component {
       grid.push(cols);
     }
     this.state = {
+      arrScore:[],
       grid,
-      arrScore,
       acorn: {
         row: Math.floor(Math.random() * 16),
         col: Math.floor(Math.random() * 16),
@@ -39,8 +39,6 @@ class App extends Component {
       }    
     }
   }
-
-
 
   isAcorn = (cell) => {
     const { acorn } = this.state;
@@ -180,16 +178,20 @@ class App extends Component {
   }
 
   render(){
+    
     const {grid, gameOver, squirrel, arrScore} = this.state;
+    console.log(arrScore);
     return(
       <div className="row">
-      <div className="App col-md-8">
+        <div className="App col-md-8">
         {
           gameOver
-          ? <button onClick={() => this.setState(() => {
+          ? <button onClick={() =>
+            this.setState(() => {
             const RepeatHeadRow = Math.floor(Math.random() * (14 - 2) +2);
             const RepeatHeadCol = Math.floor(Math.random() * (14 - 2) +2);
             const nextState = {
+              arrScore:[...arrScore, squirrel.body.length-2],
               gameOver: false,
               squirrel: {
                 ...squirrel,
@@ -203,7 +205,6 @@ class App extends Component {
                 row: Math.floor(Math.random() * 16),
                 col: Math.floor(Math.random() * 16),
               },
-              arrScore: [...arrScore, squirrel.body.length-2]
             };
           return nextState;
           }, () => {
@@ -230,7 +231,8 @@ class App extends Component {
         </section>
         }
       </div>
-      < Score className="col-md-4"
+      
+     <Score className="col-md-4"
         score={squirrel.body.length-2}
         arrScore={arrScore}
       />
