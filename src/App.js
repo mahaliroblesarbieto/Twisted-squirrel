@@ -185,7 +185,7 @@ class App extends Component {
       <div className="App col-md-8">
         {
           gameOver
-          ? <h1>Fin del juego! Tu puntaje es {squirrel.body.length -2 }! </h1>
+          ? <button>Jugar de Nuevo</button>
           : <section className="grid">
           {
             grid.map((row, i) => (
