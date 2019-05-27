@@ -180,44 +180,38 @@ class App extends Component {
   render(){
     
     const {grid, gameOver, squirrel, arrScore} = this.state;
-    console.log(arrScore);
     return(
       <div className="row">
         <div className="App col-md-8">
         {
           gameOver
-          ? <button onClick={() =>
-            this.setState(() => {
-            const RepeatHeadRow = Math.floor(Math.random() * (14 - 2) +2);
-            const RepeatHeadCol = Math.floor(Math.random() * (14 - 2) +2);
-            const nextState = {
-              arrScore:[...arrScore, squirrel.body.length-2],
-              gameOver: false,
-              squirrel: {
-                ...squirrel,
-                head: {
-                  row: RepeatHeadRow,
-                  col: RepeatHeadCol
-                },
-                body: [{row:RepeatHeadRow,col:RepeatHeadCol-1},{row:RepeatHeadRow,col:RepeatHeadCol-2}]
-              },
+          ? <button onClick={() => {
+            const initialHeadRow = Math.floor(Math.random() * (14 - 2) +2);
+            const initialHeadCol = Math.floor(Math.random() * (14 - 2) +2);
+            this.setState({
+              gameOver: false, 
+              arrScore:[...arrScore, squirrel.body.length-2], 
               acorn: {
-                row: Math.floor(Math.random() * 16),
-                col: Math.floor(Math.random() * 16),
+              row: Math.floor(Math.random() * 16),
+              col: Math.floor(Math.random() * 16),
+            },
+            squirrel: {
+              head: {
+                row: initialHeadRow,
+                col: initialHeadCol,
               },
-            };
-          return nextState;
-          }, () => {
-            const {squirrel} = this.state;
-            setTimeout(() => {
-              this.gameLoop()
-            }, squirrel.body.length ? (400 / squirrel.body.length) + 200 : 400)
-          })}>Jugar de Nuevo</button>
+              direction: {
+                x: 1,
+                y: 0
+              },
+              body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}],
+          }});
+        this.componentDidMount()}}>Jugar de Nuevo</button>
           : <section className="grid">
           {
             grid.map((row, i) => (
               row.map(cell => 
-                <div className={`cell
+                <div key={`${cell.row} ${cell.col}`} className={`cell
                   ${
                     this.isHead(cell)
                     ? 'head' : this.isAcorn(cell)
