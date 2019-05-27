@@ -34,7 +34,7 @@ class App extends Component {
           x: 1,
           y: 0
         },
-        body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}]
+        body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}],
       }    
     }
   }
@@ -204,7 +204,9 @@ class App extends Component {
         </section>
         }
       </div>
-      < Score className="col-md-4"/>
+      < Score className="col-md-4"
+        score={squirrel.body.length -2}
+      />
       </div>
     );
   }
