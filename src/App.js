@@ -29,6 +29,10 @@ class App extends Component {
           row: initialHeadRow,
           col: initialHeadCol,
         },
+        direction: {
+          x: 1,
+          y: 0
+        },
         body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}]
       }    
     }
@@ -49,6 +53,33 @@ class App extends Component {
   isBody = (cell) => {
     const { squirrel } = this.state;
     return squirrel.body.find(inBody => inBody.row === cell.row && inBody.col === cell.col);
+  }
+
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.gameLoop()
+    }, 1000)
+  }
+
+  gameLoop = () => {
+    this.setState(({squirrel}) => {
+      const nextState = {
+        squirrel: {
+          ...squirrel,
+          head: {
+            row: squirrel.head.row + squirrel.direction.y,
+            col: squirrel.head.col + squirrel.direction.x
+          },
+          body: [squirrel.head, ...squirrel.body]
+        },
+      };
+      nextState.squirrel.body.pop();
+      return nextState;
+    }, () => {
+      setTimeout(() => {
+        this.gameLoop()
+      }, 1000)
+    });
   }
 
   render(){
