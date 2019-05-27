@@ -63,7 +63,7 @@ class App extends Component {
     });
     setTimeout(() => {
       this.gameLoop()
-    }, 1000)
+    }, this.state.squirrel.body.length ? (400 / this.state.squirrel.body.length) + 200 : 400)
   }
 
   getRandomAcorn = () => {
@@ -107,7 +107,7 @@ class App extends Component {
       }
       setTimeout(() => {
         this.gameLoop()
-      }, 1000)
+      }, this.state.squirrel.body.length ? (400 / this.state.squirrel.body.length) + 200 : 400)
     });
   }
 
