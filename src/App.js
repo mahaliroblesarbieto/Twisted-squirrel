@@ -29,6 +29,7 @@ class App extends Component {
           row: initialHeadRow,
           col: initialHeadCol,
         },
+        body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}]
       }    
     }
   }
@@ -45,6 +46,11 @@ class App extends Component {
       && squirrel.head.col === cell.col;
   }
 
+  isBody = (cell) => {
+    const { squirrel } = this.state;
+    return squirrel.body.find(inBody => inBody.row === cell.row && inBody.col === cell.col);
+  }
+
   render(){
     const {grid} = this.state;
     return(
@@ -57,7 +63,8 @@ class App extends Component {
                   ${
                     this.isHead(cell)
                     ? 'head' : this.isAcorn(cell)
-                    ? 'acorn':''
+                    ? 'acorn': this.isBody(cell)
+                    ? 'body' : ''
                   }`
                 }>
                 </div>)

@@ -33,3 +33,12 @@
 .head{
   background-image: url('img/zoo.png');
 }
+
+.body{
+  width: 28px;
+  height: 28px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: #9F7267;
+}
