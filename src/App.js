@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import Score from './components/Score'
-
+import {Score} from './components/Score'
 import './App.css';
 
 class App extends Component {
   constructor(){
     super()
     const grid = [];
+    const score = [];
     const initialHeadRow = Math.floor(Math.random() * (14 - 2) +2);
     const initialHeadCol = Math.floor(Math.random() * (14 - 2) +2);
     for(let row = 0; row < 16; row++){
@@ -20,6 +20,7 @@ class App extends Component {
       grid.push(cols);
     }
     this.state = {
+      score,
       grid,
       acorn: {
         row: Math.floor(Math.random() * 16),
@@ -185,7 +186,32 @@ class App extends Component {
       <div className="App col-md-8">
         {
           gameOver
-          ? <button onClick={() => this.setState({gameOver:false})}>Jugar de Nuevo</button>
+          ? <button onClick={() => this.setState(({squirrel}) => {
+            const RepeatHeadRow = Math.floor(Math.random() * (14 - 2) +2);
+            const RepeatHeadCol = Math.floor(Math.random() * (14 - 2) +2);
+            const nextState = {
+              score: [].push(squirrel.body.length-2),
+              gameOver: false,
+              squirrel: {
+                ...squirrel,
+                head: {
+                  row: RepeatHeadRow,
+                  col: RepeatHeadCol
+                },
+                body: [{row:RepeatHeadRow,col:RepeatHeadCol-1},{row:RepeatHeadRow,col:RepeatHeadCol-2}]
+              },
+              acorn: {
+                row: Math.floor(Math.random() * 16),
+                col: Math.floor(Math.random() * 16),
+              }
+            };
+          return nextState;
+          }, () => {
+            const {squirrel} = this.state;
+            setTimeout(() => {
+              this.gameLoop()
+            }, squirrel.body.length ? (400 / squirrel.body.length) + 200 : 400)
+          })}>Jugar de Nuevo</button>
           : <section className="grid">
           {
             grid.map((row, i) => (
@@ -206,6 +232,7 @@ class App extends Component {
       </div>
       < Score className="col-md-4"
         score={squirrel.body.length -2}
+        ScoreRanking={this.state.score}
       />
       </div>
     );
