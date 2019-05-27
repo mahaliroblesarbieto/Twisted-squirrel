@@ -185,7 +185,7 @@ class App extends Component {
       <div className="App col-md-8">
         {
           gameOver
-          ? <button>Jugar de Nuevo</button>
+          ? <button onClick={() => this.setState({gameOver:false})}>Jugar de Nuevo</button>
           : <section className="grid">
           {
             grid.map((row, i) => (
