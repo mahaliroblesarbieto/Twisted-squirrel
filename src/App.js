@@ -38,6 +38,8 @@ class App extends Component {
     }
   }
 
+
+
   isAcorn = (cell) => {
     const { acorn } = this.state;
     return acorn.row === cell.row
@@ -79,10 +81,27 @@ class App extends Component {
       nextState.squirrel.body.pop();
       return nextState;
     }, () => {
+      if (this.isOffEdge()) {
+        this.setState({
+          gameOver: true,
+        });
+        return;
+      }
       setTimeout(() => {
         this.gameLoop()
       }, 1000)
     });
+  }
+
+  isOffEdge = () => {
+    const { squirrel } = this.state;
+
+    if (squirrel.head.col > 15
+      || squirrel.head.col < 0
+      || squirrel.head.row > 15
+      || squirrel.head.row < 0) {
+        return true;
+      }
   }
 
   setDirection = (event) => {
@@ -135,9 +154,13 @@ class App extends Component {
   }
 
   render(){
-    const {grid} = this.state;
+    const {grid, gameOver} = this.state;
     return(
       <div className="App">
+        {
+          gameOver
+          ? <h1>Game Over!</h1>
+          : 
         <section className="grid">
           {
             grid.map((row, i) => (
@@ -154,6 +177,7 @@ class App extends Component {
             ))
           }
         </section>
+        }
       </div>
     )
   }
