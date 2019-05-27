@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Score from './components/Score'
-
 import './App.css';
 
 class App extends Component {
@@ -179,13 +178,37 @@ class App extends Component {
   }
 
   render(){
-    const {grid, squirrel, gameOver} = this.state;
+    const {grid, gameOver, squirrel} = this.state;
     return(
       <div className="row">
       <div className="App col-md-8">
         {
           gameOver
-          ? <h1>Fin del juego! Tu puntaje es {squirrel.body.length -2 }! </h1>
+          ? <button onClick={() => this.setState(() => {
+            const RepeatHeadRow = Math.floor(Math.random() * (14 - 2) +2);
+            const RepeatHeadCol = Math.floor(Math.random() * (14 - 2) +2);
+            const nextState = {
+              gameOver: false,
+              squirrel: {
+                ...squirrel,
+                head: {
+                  row: RepeatHeadRow,
+                  col: RepeatHeadCol
+                },
+                body: [{row:RepeatHeadRow,col:RepeatHeadCol-1},{row:RepeatHeadRow,col:RepeatHeadCol-2}]
+              },
+              acorn: {
+                row: Math.floor(Math.random() * 16),
+                col: Math.floor(Math.random() * 16),
+              }
+            };
+          return nextState;
+          }, () => {
+            const {squirrel} = this.state;
+            setTimeout(() => {
+              this.gameLoop()
+            }, squirrel.body.length ? (400 / squirrel.body.length) + 200 : 400)
+          })}>Jugar de Nuevo</button>
           : <section className="grid">
           {
             grid.map((row, i) => (
@@ -205,7 +228,7 @@ class App extends Component {
         }
       </div>
       < Score className="col-md-4"
-        score={squirrel.body.length -2}
+        score={squirrel.body.length-2}
       />
       </div>
     );
