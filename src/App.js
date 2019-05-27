@@ -29,10 +29,16 @@ class App extends Component {
           row: initialHeadRow,
           col: initialHeadCol,
         },
+        direction: {
+          x: 1,
+          y: 0
+        },
         body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}]
       }    
     }
   }
+
+
 
   isAcorn = (cell) => {
     const { acorn } = this.state;
@@ -51,10 +57,110 @@ class App extends Component {
     return squirrel.body.find(inBody => inBody.row === cell.row && inBody.col === cell.col);
   }
 
+  componentDidMount = () => {
+    document.addEventListener('keydown', (e) => {
+      this.setDirection(e);
+    });
+    setTimeout(() => {
+      this.gameLoop()
+    }, 1000)
+  }
+
+  gameLoop = () => {
+    this.setState(({squirrel}) => {
+      const nextState = {
+        squirrel: {
+          ...squirrel,
+          head: {
+            row: squirrel.head.row + squirrel.direction.y,
+            col: squirrel.head.col + squirrel.direction.x
+          },
+          body: [squirrel.head, ...squirrel.body]
+        },
+      };
+      nextState.squirrel.body.pop();
+      return nextState;
+    }, () => {
+      if (this.isOffEdge()) {
+        this.setState({
+          gameOver: true,
+        });
+        return;
+      }
+      setTimeout(() => {
+        this.gameLoop()
+      }, 1000)
+    });
+  }
+
+  isOffEdge = () => {
+    const { squirrel } = this.state;
+
+    if (squirrel.head.col > 15
+      || squirrel.head.col < 0
+      || squirrel.head.row > 15
+      || squirrel.head.row < 0) {
+        return true;
+      }
+  }
+
+  setDirection = (event) => {
+    const { squirrel } = this.state;
+    if (event.keyCode === 38) { // up
+      if (squirrel.direction.y === -1) return;
+      this.setState(({squirrel}) => ({
+        squirrel: {
+          ...squirrel,
+          direction: {
+            x: 0,
+            y: 1,
+          }
+        }
+      }))
+    } else if (event.keyCode === 40) {// down 
+      if (squirrel.direction.y === 1) return;
+      this.setState(({squirrel}) => ({
+        squirrel: {
+          ...squirrel,
+          direction: {
+            x: 0,
+            y: -1,
+          }
+        }
+      }))
+    } else if (event.keyCode === 39)  {//right
+      if (squirrel.direction.x === 1) return;
+      this.setState(({squirrel}) => ({
+        squirrel: {
+          ...squirrel,
+          direction: {
+            x: -1,
+            y: 0,
+          }
+        }
+      }))
+    } else if (event.keyCode === 37)  { // left
+      if (squirrel.direction.x === -1) return;
+      this.setState(({squirrel}) => ({
+        squirrel: {
+          ...squirrel,
+          direction: {
+            x: 1,
+            y: 0,
+          }
+        }
+      }))
+    }
+  }
+
   render(){
-    const {grid} = this.state;
+    const {grid, gameOver} = this.state;
     return(
       <div className="App">
+        {
+          gameOver
+          ? <h1>Game Over!</h1>
+          : 
         <section className="grid">
           {
             grid.map((row, i) => (
@@ -71,6 +177,7 @@ class App extends Component {
             ))
           }
         </section>
+        }
       </div>
     )
   }
