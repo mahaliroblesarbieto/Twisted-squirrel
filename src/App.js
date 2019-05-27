@@ -18,7 +18,17 @@ class App extends Component {
     }
     this.state = {
       grid,
+      acorn: {
+        row: Math.floor(Math.random() * 16),
+        col: Math.floor(Math.random() * 16),
+      },
     }    
+  }
+
+  isAcorn = (cell) => {
+    const { acorn } = this.state;
+    return acorn.row === cell.row
+      && acorn.col === cell.col;
   }
 
   render(){
@@ -28,7 +38,7 @@ class App extends Component {
         <section className="grid">
           {
             grid.map((row, i) => (
-              row.map(cell => <div className="cell"></div>)
+              row.map(cell => <div className={`cell ${this.isAcorn(cell)?'acorn':''}`}></div>)
             ))
           }
         </section>
