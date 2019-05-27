@@ -56,6 +56,9 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    document.addEventListener('keydown', (e) => {
+      this.setDirection(e);
+    });
     setTimeout(() => {
       this.gameLoop()
     }, 1000)
@@ -80,6 +83,55 @@ class App extends Component {
         this.gameLoop()
       }, 1000)
     });
+  }
+
+  setDirection = (event) => {
+    const { squirrel } = this.state;
+    if (event.keyCode === 38) { // up
+      if (squirrel.direction.y === -1) return;
+      this.setState(({squirrel}) => ({
+        squirrel: {
+          ...squirrel,
+          direction: {
+            x: 0,
+            y: 1,
+          }
+        }
+      }))
+    } else if (event.keyCode === 40) {// down 
+      if (squirrel.direction.y === 1) return;
+      this.setState(({squirrel}) => ({
+        squirrel: {
+          ...squirrel,
+          direction: {
+            x: 0,
+            y: -1,
+          }
+        }
+      }))
+    } else if (event.keyCode === 39)  {//right
+      if (squirrel.direction.x === 1) return;
+      this.setState(({squirrel}) => ({
+        squirrel: {
+          ...squirrel,
+          direction: {
+            x: -1,
+            y: 0,
+          }
+        }
+      }))
+    } else if (event.keyCode === 37)  { // left
+      if (squirrel.direction.x === -1) return;
+      this.setState(({squirrel}) => ({
+        squirrel: {
+          ...squirrel,
+          direction: {
+            x: 1,
+            y: 0,
+          }
+        }
+      }))
+    }
   }
 
   render(){
