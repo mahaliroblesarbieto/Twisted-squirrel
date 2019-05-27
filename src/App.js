@@ -6,6 +6,8 @@ class App extends Component {
   constructor(){
     super()
     const grid = [];
+    const initialHeadRow = Math.floor(Math.random() * (14 - 2) +2);
+    const initialHeadCol = Math.floor(Math.random() * (14 - 2) +2);
     for(let row = 0; row < 16; row++){
       const cols = [];
       for(let col = 0; col < 16; col++){
@@ -24,9 +26,10 @@ class App extends Component {
       },
       squirrel: {
         head: {
-          row: 8,
-          col: 8
+          row: initialHeadRow,
+          col: initialHeadCol,
         },
+        body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}]
       }    
     }
   }
@@ -43,6 +46,11 @@ class App extends Component {
       && squirrel.head.col === cell.col;
   }
 
+  isBody = (cell) => {
+    const { squirrel } = this.state;
+    return squirrel.body.find(inBody => inBody.row === cell.row && inBody.col === cell.col);
+  }
+
   render(){
     const {grid} = this.state;
     return(
@@ -55,7 +63,8 @@ class App extends Component {
                   ${
                     this.isHead(cell)
                     ? 'head' : this.isAcorn(cell)
-                    ? 'acorn':''
+                    ? 'acorn': this.isBody(cell)
+                    ? 'body' : ''
                   }`
                 }>
                 </div>)
