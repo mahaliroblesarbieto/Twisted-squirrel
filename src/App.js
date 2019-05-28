@@ -184,10 +184,10 @@ class App extends Component {
       <div>
       <Header/>
       <div className="row margin">
-        <div className="App col-md-8">
+        <div className="App col-md-7">
         {
           gameOver
-          ? <button onClick={() => {
+          ? <button className="button-play-again" onClick={() => {
             const initialHeadRow = Math.floor(Math.random() * (14 - 2) +2);
             const initialHeadCol = Math.floor(Math.random() * (14 - 2) +2);
             this.setState({
@@ -228,7 +228,7 @@ class App extends Component {
         }
       </div>
       
-     <Score className="col-md-4"
+     <Score className="col-md-5"
         score={squirrel.body.length-2}
         arrScore={arrScore}
       />
