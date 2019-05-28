@@ -6,9 +6,9 @@ export default function Score (props) {
           <div>
             { 
               props.arrScore.length > 0 ? 
-              <div>
+              <div >
                 {props.arrScore.map((item) => (
-                  <div className="row">
+                  <div className="row" key={item.toString()}>
                     <div className="col-md-8">
                       <h2>Puntaje: </h2>
                     </div>
