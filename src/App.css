@@ -24,7 +24,7 @@
 .cell {
   width: 30px;
   height: 30px;
-  outline: 1.5px solid#604696;
+  outline: 1.7px solid#374851;
   display: inline-block;
 }
 
@@ -44,5 +44,17 @@
   border-radius: 50%;
   background: #9F7267;
 }
+
+.button-play-again{
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 18px;
+  background-color: #ff5f23;
+  font-family: Muli,sans-serif;
+  border: 1px solid transparent;
+  color: #fff;
+  margin-top: 15%
+}
+
 
 
