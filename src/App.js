@@ -235,7 +235,6 @@ class App extends Component {
         arrScore={arrScore}
       />
       </div>
-     
       </div>
       </div>
     );
