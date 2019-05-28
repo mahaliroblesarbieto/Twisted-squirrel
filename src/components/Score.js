@@ -5,14 +5,14 @@ import './styles/Score.css';
 export default function Score (props) {
         return(
           <div className="width">
-            { 
+             { 
               props.arrScore.length > 0 ? 
               <div>
-                {props.arrScore.map((item) => (
+                {props.arrScore.map((item, index) => (
                   <div className="row">
                     <div className="col-md-1 bellota"></div>
                     <div className="col-md-6">
-                      <h2 className="size">Puntaje {props.arrScore.indexOf(item)+1}</h2>
+                      <h2 className="size">Puntaje {index + 1}</h2>
                     </div>
                     <div className="col-md-5">
                       <h2 className="size">{item}</h2>

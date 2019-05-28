@@ -20,7 +20,7 @@ class App extends Component {
       grid.push(cols);
     }
     this.state = {
-      arrScore:[],
+      arrScore: [],
       grid,
       acorn: {
         row: Math.floor(Math.random() * 16),
