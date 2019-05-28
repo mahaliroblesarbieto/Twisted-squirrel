@@ -19,7 +19,7 @@ export default function Score (props) {
                 ))}
                 <div className="row">
                   <div className="col-md-10">
-                    <h2>Puntaje</h2>
+                    <h2>Puntaje{props.arrScore.length+1}</h2>
                   </div>
                   <div className="col-md-2">
                     <h2>{props.score}</h2>
