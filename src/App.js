@@ -227,11 +227,13 @@ class App extends Component {
         </section>
         }
       </div>
-      
-     <Score className="col-md-5"
+      <div className="col-md-5">
+      <Score 
         score={squirrel.body.length-2}
         arrScore={arrScore}
       />
+      </div>
+     
       </div>
       </div>
     );
