@@ -187,7 +187,9 @@ class App extends Component {
         <div className="App col-md-7">
         {
           gameOver
-          ? <button className="button-play-again" onClick={() => {
+          ? <div className="center"><h2>¡GAME OVER!</h2>
+            <div className="dead"></div>
+          <button className="button-play-again" onClick={() => {
             const initialHeadRow = Math.floor(Math.random() * (14 - 2) +2);
             const initialHeadCol = Math.floor(Math.random() * (14 - 2) +2);
             this.setState({
@@ -208,7 +210,7 @@ class App extends Component {
               },
               body: [{row:initialHeadRow,col:initialHeadCol-1},{row:initialHeadRow,col:initialHeadCol-2}],
           }});
-        this.componentDidMount()}}>Jugar de Nuevo</button>
+        this.componentDidMount()}}>Jugar de Nuevo</button></div>
           : <section className="grid">
           {
             grid.map((row, i) => (

@@ -60,4 +60,19 @@
   width: 100%
 }
 
+.dead{
+  background-image: url('img/dead4.png');
+  background-repeat: no-repeat;
+  background-position: 50% 20%;
+  height: 9vh;
+  margin-top: 15%
+}
+
+.center{
+  text-align: center;
+  margin-top: 10%
+}
+
+
+
 
