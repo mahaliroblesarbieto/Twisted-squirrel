@@ -12,7 +12,7 @@ export default function Score (props) {
                   <div className="row">
                     <div className="col-md-1 bellota"></div>
                     <div className="col-md-6">
-                      <h2 className="size">Puntaje{props.arrScore.indexOf(item)+1}</h2>
+                      <h2 className="size">Puntaje {props.arrScore.indexOf(item)+1}</h2>
                     </div>
                     <div className="col-md-5">
                       <h2 className="size">{item}</h2>
@@ -22,7 +22,7 @@ export default function Score (props) {
                 <div className="row">
                   <div className="col-md-1 bellota"></div>
                   <div className="col-md-6">
-                    <h2 className="size">Puntaje{props.arrScore.length+1}</h2>
+                    <h2 className="size">Puntaje {props.arrScore.length+1}</h2>
                   </div>
                   <div className="col-md-5">
                     <h2 className="size">{props.score}</h2>
