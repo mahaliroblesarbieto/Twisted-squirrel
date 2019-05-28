@@ -1,68 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TWISTED SQUIRREL
 
-## Available Scripts
+## Índice
 
-In the project directory, you can run:
 
-### `npm start`
+* [Definición del producto](#Definición-del-producto)
+* [Pseudocódigo](#Pseudocódigo)
+* [Bonus Track](#Bonus-Track)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+***
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Definición del producto
 
-### `npm test`
+1. ¿Quiénes son los principales usuarios de producto?
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    Jugadores de Twisted Squirrel.
 
-### `npm run build`
+2. ¿Cuáles son los objetivos de los usuarios?
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    Acceder a un juego divertido.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+3. ¿Cuáles son los datos más relevantes que quieren ver en la interfaz?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    - Un tablero de 16x16 cuadros.
+    - Que el jugador sea una ardilla que ocupe tres cuadros del tablero.
+    - Que la comida sea una bellota.
+    - Que el cuerpo de la ardilla sean círculos.
+    - El puntaje que obtiene según va jugando.
+    - El puntaje que obtiene por juego.
 
-### `npm run eject`
+4. ¿Cuándo utilizan o utilizarían el producto?
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    Cuando deseen acceder a un juego divertido.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Pseudocódigo
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Para empezar a realizar el proyecto se plantearon los siguientes pasos:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Crear aplicación con create-reat-app
+2. Hacer tablero de 16x16
+3. Hacer aparecer una bellota al azar.
+3. Hacer aparecer la ardilla con su cuerpo.
+- Hacer aparecer la cabeza, que ocupe un cuadro.
+- Hacer aparecer la cabeza en posición aleatoria.
+- Hacer aparecer el cuerpo, que ocupe dos cuadros.
+- Hacer aparecer el cuerpo unido a la cabeza y que sea aleatorio con la cabeza.
+- Dar movimiento y dirección a la ardilla.
+4. Crear función iterativa
+- Obtener dirección y mover a la ardilla de manera inversa a las teclas.
+- Verificar si sale del borde.
+- Verificar si choca con bellota.
+- Que bellota no aparezca en el cuerpo de la ardilla.
+- Hacer crecer a la ardilla.
+- Mostrar puntaje.
+- Agregar otra bellota en posición aleatoria.
 
-## Learn More
+## Bonus Track
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Ardilla aumenta de velocidad, según aumenta de tamaño.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
