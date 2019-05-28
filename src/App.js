@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Score from './components/Score';
-// import Header from './components/Header';
+import Header from './components/Header';
 import './App.css';
 
 class App extends Component {
@@ -181,7 +181,9 @@ class App extends Component {
     
     const {grid, gameOver, squirrel, arrScore} = this.state;
     return(
-      <div className="row">
+      <div>
+      <Header/>
+      <div className="row margin">
         <div className="App col-md-8">
         {
           gameOver
@@ -230,6 +232,7 @@ class App extends Component {
         score={squirrel.body.length-2}
         arrScore={arrScore}
       />
+      </div>
       </div>
     );
   }
